@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم — باسل</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style/admin.css">
+</head>
+
+<body>
+
+  <div id="toast" class="toast"></div>
+
+  <header class="admin-header">
+    <a href="index.html" class="admin-logo">
+      باسل
+      <span>لوحة التحكم</span>
+    </a>
+    <div style="display:flex;gap:0.75rem;align-items:center;">
+      <button class="btn-secondary" onclick="handleReset()" style="font-size:0.78rem;">↺ إعادة تعيين</button>
+      <a href="index.html" class="btn-back">← العودة للموقع</a>
+    </div>
+  </header>
+
+  <main class="admin-body">
+
+    <div class="admin-section-title">إدارة الخدمات</div>
+    <div class="admin-section-sub">أضف أو عدل أو احذف الخدمات التي تظهر في موقعك. التغييرات تطبق فورا.</div>
+
+    <div class="add-form-card">
+      <h3>+ إضافة خدمة جديدة</h3>
+      <div class="form-row">
+        <div class="field">
+          <label>اسم الخدمة</label>
+          <input type="text" id="add-name" placeholder="مثال: تصميم الهوية">
+        </div>
+        <div class="field">
+          <label>وصف الخدمة</label>
+          <textarea id="add-description" placeholder="اشرح ما تقدمه في هذه الخدمة..."></textarea>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-secondary" onclick="resetAddForm()">مسح</button>
+        <button class="btn-primary" onclick="handleAdd()">+ إضافة الخدمة</button>
+      </div>
+    </div>
+
+    <div class="services-list-header">
+      <h3>الخدمات الحالية</h3>
+      <span class="services-count" id="services-count">0 خدمة</span>
+    </div>
+    <div class="services-list" id="services-list"></div>
+
+  </main>
+
+  <div class="modal-overlay" id="edit-modal">
+    <div class="modal">
+      <div class="modal-title">تعديل الخدمة</div>
+      <div class="modal-field field">
+        <label>اسم الخدمة</label>
+        <input type="text" id="edit-name" placeholder="اسم الخدمة">
+      </div>
+      <div class="modal-field field">
+        <label>وصف الخدمة</label>
+        <textarea id="edit-description" placeholder="وصف الخدمة"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeEditModal()">إلغاء</button>
+        <button class="btn-primary" onclick="handleEdit()">حفظ التعديلات</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="delete-modal">
+    <div class="modal">
+      <div class="modal-title">حذف الخدمة</div>
+      <p class="confirm-modal-text">هل أنت متأكد من حذف خدمة</p>
+      <p class="confirm-name" id="delete-service-name"></p>
+      <p class="confirm-modal-text" style="margin-top:0.5rem;">لا يمكن التراجع عن هذا الإجراء.</p>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeDeleteModal()">إلغاء</button>
+        <button class="btn-danger" onclick="handleDelete()">✕ حذف</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/db.js"></script>
+  <script src="scripts/admin.js"></script>
+</body>
+
+</html>
